@@ -1,0 +1,12 @@
+
+require './fifo'
+
+a = FIFO.new([5,4,3,2])
+a.insert(6)
+a.print()
+a.insert(7, true)
+a.print()
+a.insert([9,8], grow = true)
+a.print()
+a.insert([12,11,10])
+a.print()
