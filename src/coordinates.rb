@@ -14,4 +14,9 @@ class Coordinates
     (x**2+y**2)**0.5
   end
 
+  def self.distance(c1,c2)
+    #static class measuring distance between two sets of coordinates
+    ((c1.x-c2.x)**2+(c1.y-c2.y)**2)**0.5
+  end
+
 end
