@@ -1,26 +1,25 @@
 require_relative 'coordinates'
-require 'timeout'
+require_relative 'snake'
 
 class Board
 
   attr_reader :height,:width,:food_loc
 
-  #Class variable
+  #Class variables
   @@start_dist= 5 #minimum distance from other players starting points
-  @@start_timeout=5 #in seconds
+  @@start_timeout=10 #in attempts
 
   public
 
-  def initialize(_height,_width)
+  def initialize(_players,_height,_width)
     #constructor
-    # TO DO: add player list input
-    @height=_height
-    @width=_width
-    #@players = _players #list of player classes
+    @height=_height #int
+    @width=_width #int
+    @players = _players #list of Player classes
     gen_food()
   end
 
-  def gen_food()
+  def gen_food
     #Sets a new food location, cannot be same as previous location or on edges
     #TO DO: Need to handle cases where snake is already on generated location
 
@@ -40,29 +39,28 @@ class Board
   end
 
   def gen_start
-    # UNTESTED
+    #TO DO: Fix position access
     # generate start locations
     start_loc=Coordinates.new(nil,nil)
-    for i in players.length
+    attempts=0
+
+    for i in 0...@players.length
       rand_loc(start_loc)
       if i==0 then
-        players[i].set_snake_start(start_loc)
+        @players[i].gen_snake(start_loc.clone)
         next
       end
-
-      end
       while true
-        begin
-          Timeout::timeout(timeout_in_seconds) do
-              if players[0...i].all? { |p| Coordinates.distance(start_loc,p.get_snake_start)>@@start_area } then
-                players[i].set_snake_start(start_loc)
-                break
-              end
-              rand_loc(start_loc)
+          if @players[0...i].all? { |p| Coordinates.distance(start_loc,p.my_snake.position.arr[0])>@@start_dist } then
+            @players[i].gen_snake(start_loc)
+            break
           end
-        rescue Timeout::Error
-          puts "Timeout Error: Start Position Generation"
-          return
+          rand_loc(start_loc)
+          attempts+=1
+          if attempts>@@start_timeout then
+            puts "ERROR: Gen_start max placement attempts of #{@@start_timeout} exceeded."
+            return
+          end
         end
     end
 

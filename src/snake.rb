@@ -7,7 +7,7 @@ class Snake
 
   def initialize(init_loc)
     @score = 0
-    @position = FIFO.new(init_loc)
+    @position = FIFO.new([init_loc])
     @alive = true
   end
 
