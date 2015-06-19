@@ -1,0 +1,24 @@
+#Step 1: get number of snakes
+board_h, board_w, num_snakes=ARGV[0].split(',').map(&:to_i)
+puts "The Board is #{board_h} by #{board_w} and has #{num_snakes} snakes."
+
+#Step 2: parse snake location data
+for i in 0...num_snakes do
+  rhumba||=[]
+  arr=ARGV[i+1].split(',').map(&:to_i)
+  x_coord=[]
+  y_coord=[]
+  player=arr.shift
+  arr.each_with_index { |v,i| (i.odd? ? x_coord : y_coord) << v }
+  print "Player #{player} position: "
+  for j in 0...x_coord.length do
+    print "("<<x_coord[j].to_s<<","<<y_coord[j].to_s<<")"
+  end
+  puts ""
+end
+
+#Step 3: get food location
+food=ARGV[num_snakes+1].split(',').map(&:to_i)
+puts "The food is located at x=#{food[0]} y=#{food[1]}."
+
+return ["up","down","left","right"][rand(0...4)]
