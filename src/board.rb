@@ -1,26 +1,28 @@
 require_relative 'coordinates'
-require 'timeout'
+require_relative 'snake'
 
 class Board
 
   attr_reader :height,:width,:food_loc
 
-  #Class variable
-  @@start_dist= 5 #minimum distance from other players starting points
-  @@start_timeout=5 #in seconds
+  #Class variables
+  @@start_dist= 5 #minimum distance from other players starting points.
+                  #must be greater than Snake @@start_snake_length
+  @@start_snake_length=3
+  @@start_timeout=10 #in attempts
 
   public
 
-  def initialize(_height,_width)
+  def initialize(_players,_height,_width)
     #constructor
-    # TO DO: add player list input
-    @height=_height
-    @width=_width
-    #@players = _players #list of player classes
+    @height=_height #int
+    @width=_width #int
+    @players = _players #list of Player classes
+    gen_start()
     gen_food()
   end
 
-  def gen_food()
+  def gen_food
     #Sets a new food location, cannot be same as previous location or on edges
     #TO DO: Need to handle cases where snake is already on generated location
 
@@ -40,30 +42,39 @@ class Board
   end
 
   def gen_start
-    # UNTESTED
+    #TO DO: gen  rest of points and avoid edges
     # generate start locations
     start_loc=Coordinates.new(nil,nil)
-    for i in players.length
+    attempts=0
+
+    for i in 0...@players.length
       rand_loc(start_loc)
-      if i==0 then
-        players[i].set_snake_start(start_loc)
-        next
+      if i!=0 then
+        while true
+            if @players[0...i].all? { |p| Coordinates.distance(start_loc,p.my_snake.get_tail)>@@start_dist } then
+              break
+            end
+            rand_loc(start_loc)
+            attempts+=1
+            if attempts>@@start_timeout then
+              puts "ERROR: Gen_start max placement attempts of #{@@start_timeout} exceeded."
+              return
+            end
+        end
       end
 
-      end
-      while true
-        begin
-          Timeout::timeout(timeout_in_seconds) do
-              if players[0...i].all? { |p| Coordinates.distance(start_loc,p.get_snake_start)>@@start_area } then
-                players[i].set_snake_start(start_loc)
-                break
-              end
-              rand_loc(start_loc)
+      @players[i].gen_snake([start_loc.clone])
+      #gen rest of snake
+      @@start_snake_length.times do
+        while true
+          rand_coord = @players[i].my_snake.next_coordinate(Snake::ALLOWED_MOVES[rand(0...Snake::ALLOWED_MOVES.length)])
+          if not(@players[i].my_snake.in_snake(rand_coord)) then
+            break
           end
-        rescue Timeout::Error
-          puts "Timeout Error: Start Position Generation"
-          return
         end
+        @players[i].my_snake.move(rand_coord.clone,true) #true because want them to increase in length
+      end
+
     end
 
   end
