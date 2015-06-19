@@ -16,10 +16,28 @@ class FIFO
   end
 
   def fifo_print
-    for i in @arr
+    @arr.each do |i|
       i.coords_print
-      print ' - ' unless i == @arr.size #Stephane is a poo poo face
+      print ' - ' unless i == @arr.last #Stephane is a poo poo face
     end
     puts ''
+  end
+
+  def first
+    return @arr.first.x, @arr.first.y
+  end
+
+  def last
+    return @arr.last.x, @arr.last.x
+  end
+
+  def include(coord)
+    found = false
+    @arr.each do |c|
+      if c==coord
+        found = true
+      end
+    end
+    found
   end
 end

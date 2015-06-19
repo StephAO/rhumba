@@ -1,14 +1,11 @@
-require_relative 'player'
 require_relative 'fifo'
 require_relative 'coordinates'
 
 class Snake
 
-  attr_reader :name, :score, :position
+  attr_reader :score, :position
 
-  def initialize(_player, init_loc)
-    @player = _player
-    @name = _player.name
+  def initialize(init_loc)
     @score = 0
     @position = FIFO.new(init_loc)
     @alive = true
@@ -23,9 +20,26 @@ class Snake
     end
   end
 
-  def find_coordinate(direction)
-    # direction.downcase!
-
+  def next_coordinate(direction)
+    direction.downcase!
+    x, y = @position.first
+    case direction
+      when 'left'
+        x -= 1
+      when 'right'
+        x += 1
+      when 'up'
+        y += 1
+      when 'down'
+        y -= 1
+    end
+    new_coord = Coordinates.new(x,y)
+    if @position.include(new_coord)
+      puts 'dead'
+      @alive = false
+    else
+      new_coord
+    end
   end
 
   def find_next_move(board)

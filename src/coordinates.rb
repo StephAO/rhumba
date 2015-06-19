@@ -11,7 +11,7 @@ class Coordinates
   end
 
   def magnitude
-    (x**2+y**2)**0.5
+    (@x**2+@y**2)**0.5
   end
 
   def self.distance(c1,c2)
@@ -21,6 +21,10 @@ class Coordinates
 
   def coords_print
     print "(#{@x},#{@y})"
+  end
+
+  def ==(other)
+    return @x == other.x && @y == other.y
   end
 
 end
