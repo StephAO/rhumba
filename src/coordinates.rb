@@ -19,8 +19,11 @@ class Coordinates
     ((c1.x-c2.x)**2+(c1.y-c2.y)**2)**0.5
   end
 
+<<<<<<< HEAD
   def coords_print
     print "(#{@x},#{@y})"
   end
 
+=======
+>>>>>>> origin/migs_branch
 end
