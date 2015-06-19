@@ -24,11 +24,11 @@ class FIFO
   end
 
   def first
-    return @arr.first.x, @arr.first.y
+    return @arr.first
   end
 
   def last
-    return @arr.last.x, @arr.last.x
+    return @arr.last
   end
 
   def include(coord)

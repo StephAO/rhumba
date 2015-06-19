@@ -3,26 +3,26 @@ require_relative 'coordinates'
 
 class Snake
 
+  attr_accessor :alive
   attr_reader :score, :position
 
   def initialize(init_loc)
     @score = 0
-    @position = FIFO.new([init_loc])
+    @position = FIFO.new(init_loc)
     @alive = true
   end
 
   def move(new_pos, food = false, occupied = false)
-    if not occupied and @alive
+    if @alive
       @position.insert(new_pos, food)
       @score += @position.size
-    else
-      @alive = false
     end
   end
 
   def next_coordinate(direction)
     direction.downcase!
-    x, y = @position.first
+    x = @position.first.x
+    y = @position.last.y
     case direction
       when 'left'
         x -= 1
@@ -35,7 +35,6 @@ class Snake
     end
     new_coord = Coordinates.new(x,y)
     if @position.include(new_coord)
-      puts 'dead'
       @alive = false
     else
       new_coord

@@ -24,7 +24,7 @@ class Player
     @my_snake=Snake.new(init_loc)
   end
 
-  def next_move()
+  def next_move
 
   end
 end
