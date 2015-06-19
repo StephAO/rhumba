@@ -1,16 +1,13 @@
-require_relative 'player'
 require_relative 'fifo'
 require_relative 'coordinates'
 
 class Snake
 
-  attr_reader :name, :score, :position
+  attr_reader :score, :position
 
-  def initialize(_player, init_loc)
-    @player = _player
-    @name = _player.name
+  def initialize(init_loc)
     @score = 0
-    @position = FIFO.new(init_loc)
+    @position = FIFO.new([init_loc])
     @alive = true
   end
 
