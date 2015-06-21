@@ -3,13 +3,15 @@ require_relative 'Board'
 
 class Player
 
-  attr_reader :name,:my_snake, :mem_move, :num_snakes
+  attr_reader :name, :id, :my_snake, :mem_move, :num_snakes
+
+  #TODO snake generation inside box
 
   #Class variables
   @@num_players=0
 
   Data = Struct.new(:wins, :losses, :deaths, :avg_points) do
-    def print
+    def weawts
       puts 'test'
     end
   end
@@ -48,10 +50,17 @@ class Player
     #Output from AI: "up","down","left" or right
 
     cmd="ruby fake_ai "<<data_str
-    puts cmd
-    @mem_move=@my_snake.next_coordinate(`#{cmd}`)
+    # puts cmd
+    # @mem_move=@my_snake.next_coordinate(`#{cmd}`)
+    print "GIMME"
+    @mem_move = @my_snake.next_coordinate(gets.chomp)
   end
+
   def snake_death
     @my_snake.alive = false
+  end
+
+  def commit(grow=false)
+    @my_snake.move(mem_move, grow)
   end
 end

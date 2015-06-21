@@ -23,10 +23,9 @@ class Snake
   end
 
   def next_coordinate(direction)
-    puts '-' + direction + '-'
     direction.downcase!
     x = @position.first.x
-    y = @position.last.y
+    y = @position.first.y
     case direction
       when 'left'
         x -= 1
@@ -54,6 +53,12 @@ class Snake
 
   def get_tail
     @position.last
+  end
+
+  def snake_print
+    print '*'
+    @position.arr.each { |c| c.coords_print}
+    print '*'
   end
 
 end
