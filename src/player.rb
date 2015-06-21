@@ -2,7 +2,7 @@ require_relative 'Snake'
 
 class Player
 
-  attr_reader :name,:my_snake
+  attr_reader :name,:my_snake, :mem_move
 
   #Class variables
   @@num_players=0
@@ -26,5 +26,13 @@ class Player
 
   def next_move
 
+  end
+
+  def commit(food = false)
+    @my_snake.move(mem_move, food)
+  end
+
+  def snake_death
+    @my_snake.alive = false
   end
 end

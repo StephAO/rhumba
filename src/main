@@ -1,7 +1,7 @@
 # require_relative 'coordinates'
 # require_relative 'snake'
-require_relative 'player'
-require_relative 'game'
+# require_relative 'player'
+# require_relative 'game'
 #
 # start = []
 # for i in 1..4
@@ -13,5 +13,5 @@ require_relative 'game'
 # s.position.fifo_print
 # s.move(s.next_coordinate('RIGHT'))
 # s.position.fifo_print
-a = [Player.new('Dave')]
-Game.new(a)
+# a = [Player.new('Dave')]
+# Game.new(a)

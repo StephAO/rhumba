@@ -12,7 +12,7 @@ class Snake
     @alive = true
   end
 
-  def move(new_pos, food = false, occupied = false)
+  def move(new_pos, food = false)
     if @alive
       @position.insert(new_pos, food)
       @score += @position.size
