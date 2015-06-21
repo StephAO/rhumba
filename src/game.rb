@@ -15,7 +15,7 @@ class Game
     @@num_games += 1
     @n = rand(MIN_BOARD_SIZE_PER_PLAYER*(_players.size)...MAX_BOARD_SIZE)
     @m = rand(MIN_BOARD_SIZE_PER_PLAYER*(_players.size)...MAX_BOARD_SIZE)
-    @board = Board.new(_players, n, m)
+    @board = Board.new(_players, @n, @m)
     start_game
   end
 
@@ -66,6 +66,8 @@ class Game
         winner = p
       end
     end
+  end
+
   def next_turn
     #generate data to be passed to AI
     #UNTESTED

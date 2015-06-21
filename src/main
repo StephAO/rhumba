@@ -1,17 +1,7 @@
-# require_relative 'coordinates'
-# require_relative 'snake'
-# require_relative 'player'
-# require_relative 'game'
-#
-# start = []
-# for i in 1..4
-#     start.push(Coordinates.new(i, 1))
-# end
-# s = Snake.new(start)
-# s.position.fifo_print
-# s.move(s.next_coordinate('LEFT'))
-# s.position.fifo_print
-# s.move(s.next_coordinate('RIGHT'))
-# s.position.fifo_print
-# a = [Player.new('Dave')]
+require_relative 'coordinates'
+require_relative 'snake'
+require_relative 'player'
+require_relative 'game'
+
+# a = [Player.new('Dave'), Player.new('John'), Player.new('Bob')]
 # Game.new(a)

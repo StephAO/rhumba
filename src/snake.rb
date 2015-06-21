@@ -3,8 +3,8 @@ require_relative 'coordinates'
 
 class Snake
 
-  attr_accessor :alive
-  attr_reader :score, :position
+  attr_accessor :alive, :score
+  attr_reader :position
 
   #Class constant
   ALLOWED_MOVES||=['up','down','left','right']

@@ -42,6 +42,7 @@ class Player
     setup_out=''
 
     out=`date /t`
+  end
 
   def snake_death
     @my_snake.alive = false
