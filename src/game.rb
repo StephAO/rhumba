@@ -66,6 +66,14 @@ class Game
         winner = p
       end
     end
+  def next_turn
+    #generate data to be passed to AI
+    #UNTESTED
+    num_snakes=0
+    @players.each{|p| num_snakes+=p.num_snakes}
+    out_data=[@board.height,@board.width,num_snakes]
+    puts out_data
+    #need to call on each player -> TO DO
   end
 
 end

@@ -6,6 +6,9 @@ class Snake
   attr_accessor :alive
   attr_reader :score, :position
 
+  #Class constant
+  ALLOWED_MOVES||=['up','down','left','right']
+
   def initialize(init_loc)
     @score = 0
     @position = FIFO.new(init_loc)
@@ -34,11 +37,19 @@ class Snake
         y -= 1
     end
     new_coord = Coordinates.new(x,y)
-    if @position.include(new_coord)
-      @alive = false
-    else
-      new_coord
-    end
+  end
+
+  def in_snake(coord)
+    #checks if input coordinate is in snake
+    @position.include(coord)
+  end
+
+  def get_head
+    @position.first
+  end
+
+  def get_tail
+    @position.last
   end
 
   def find_next_move(board)
