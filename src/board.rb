@@ -72,7 +72,8 @@ class Board
             break
           end
         end
-        @players[i].my_snake.move(rand_coord.clone,true) #true because want them to increase in length
+        #not using move because don't want to increase score
+        @players[i].my_snake.position.insert(rand_coord.clone, true) #true so that snake grows.
       end
 
     end

@@ -27,23 +27,30 @@ class Player
     @my_snake=Snake.new(init_loc)
   end
 
-  def call_ai
+  def get_data
+    #returns a string of current player data
+    #used for call_ai
+    out_str=[@id,(@my_snake.alive ? 1:0),@my_snake.score].join(",")
+    @my_snake.position.arr.each{|c| out_str<<",#{c.x},#{c.y}"}
+
+    return out_str
+  end
+
+  def call_ai(data_str)
     #Call AI to get next move
     #Done through command line
     #Inputs to AI:
     # (1) Board Height,Board Width,Number of Players, Number of Snakes
-    # (2) Player(owner),Snake 1 Tail,...,Snake 1 Head -> Coordinates are of form x,y => 1,x,y,x1,y2,x2,x3,y3,...
-    # (3) Player(owner),Snake 2 Tail,...,Snake 2 Head
-    # (4) ...repeat for all snakes
-    # (5) Food Location x,Food Location Y
+    # (2) Food Location x,Food Location Y
+    # (3) Player(owner) ID,Alive/Dead,Score,,Snake Tail,...,Snake Head #send alive players first then dead
+    # (4) ...repeat for all snakes -> Coordinates are of form x,y => ID,Score,x,y,x1,y2,x2,x3,y3,...
     # Note: Lists are comma separated, inputs are space separated
     #Output from AI: "up","down","left" or right
 
-    setup_out=''
-
-    out=`date /t`
+    cmd="ruby fake_ai "<<data_str
+    puts cmd
+    @mem_move=@my_snake.next_coordinate(`#{cmd}`)
   end
-
   def snake_death
     @my_snake.alive = false
   end

@@ -68,14 +68,25 @@ class Game
     end
   end
 
-  def next_turn
+  def next_turn(alive_players,dead_players)
     #generate data to be passed to AI
-    #UNTESTED
+
+    #board and num snake
     num_snakes=0
     @players.each{|p| num_snakes+=p.num_snakes}
-    out_data=[@board.height,@board.width,num_snakes]
+    out_data=[@board.height,@board.width,num_snakes].join(",")
+
+    #food info
+    out_data<<" #{@board.food_loc.x},#{@board.food_loc.y}"
+
+    l_get_data= lambda{|p| out_data<<" "<<p.get_data}
+    alive_players.each(&l_get_data)
+    dead_players.each(&l_get_data)
+
     puts out_data
-    #need to call on each player -> TO DO
+
+    #Call AI of each player with board+snake info
+    alive_players.each{|p| p.call_ai(out_data)}
   end
 
 end

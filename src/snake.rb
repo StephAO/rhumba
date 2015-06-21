@@ -3,8 +3,8 @@ require_relative 'coordinates'
 
 class Snake
 
-  attr_accessor :alive, :score
-  attr_reader :position
+  attr_accessor :alive
+  attr_reader :position, :score
 
   #Class constant
   ALLOWED_MOVES||=['up','down','left','right']
@@ -35,6 +35,9 @@ class Snake
         y += 1
       when 'down'
         y -= 1
+      else
+        puts "ERROR: Next Coordinate: Invalid input!"
+        return
     end
     new_coord = Coordinates.new(x,y)
   end
@@ -50,10 +53,6 @@ class Snake
 
   def get_tail
     @position.last
-  end
-
-  def find_next_move(board)
-
   end
 
 end
