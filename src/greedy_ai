@@ -1,5 +1,9 @@
 #name of snake memory
 MY_MEM='greedy.mem'
+@board_h=nil
+@board_w=nil
+@my_x=nil
+@my_y=nil
 
 def main(input)
   #Check if initializing or passing snake data
@@ -27,7 +31,7 @@ end
 
 def greedy(input)
   #Step 1: get number of snakes
-  board_h, board_w, num_snakes=input[0].split(',').map(&:to_i)
+  @board_h, @board_w, num_snakes=input[0].split(',').map(&:to_i)
 
   #Step 2: get food location
   food_x,food_y=input[1].split(',').map(&:to_i)
@@ -43,28 +47,104 @@ def greedy(input)
     score=arr.shift
     arr.each_with_index { |v,i| (i.odd? ? y_coord : x_coord) << v }
     if is_me?(player_ID)
-      my_x=x_coord
-      my_y=y_coord
+      @my_x=x_coord
+      @my_y=y_coord
       my_status=alive_dead
       my_score=score
     end
   end
 
   #Step 4: Greedy Algorithm
-  if (my_x.last>food_x)&&(my_x[-2]!=(my_x[-1]-1))
-    #go left
-    print "left"
-  elsif (my_x.last<food_x)&&(my_x[-2]!=(my_x[-1]+1))
-    #travel y
-    print "right"
-  elsif (my_y.last>food_y)&&(my_y[-2]!=(my_y[-1]-1))
-    print "down"
-  elsif (my_y.last<food_y)&&(my_y[-2]!=(my_y[-1]+1))
-    print "up"
+  if (@my_x.first>food_x)
+    go_left
+  elsif (@my_x.first<food_x)
+    go_right
+  elsif (@my_y.first>food_y)
+    go_down
+  elsif (@my_y.first<food_y)
+    go_up
   else
     print "wut"
   end
 
+end
+
+def go_up
+  if not(in_snake("up"))
+    print "up"
+  else
+    if @my_x.first+1 < @board_w
+      go_right
+    else
+      go_left
+    end
+  end
+end
+
+def go_down
+  if not(in_snake("down"))
+    print "down"
+  else
+    if @my_x.first-1 > 0
+      go_left
+    else
+      go_right
+    end
+  end
+end
+
+def go_right
+  if not(in_snake("right"))
+    print "right"
+  else
+    if @my_y.first-1 > 0
+      go_down
+    else
+      go_up
+    end
+  end
+end
+
+def go_left
+  if not(in_snake("left"))
+    print "left"
+  else
+    if @my_y.first+1 < @board_h
+      go_up
+    else
+      go_down
+    end
+  end
+end
+
+def in_snake(direction)
+  case direction
+    when 'left'
+      @my_x.size.times do |i|
+        if @my_x[i] == @my_x.first-1 and @my_y[i] == @my_y.first
+          return true
+        end
+      end
+    when 'right'
+      @my_x.size.times do |i|
+        if @my_x[i] == @my_x.first+1 and @my_y[i] == @my_y.first
+          return true
+        end
+      end
+    when 'up'
+      @my_x.size.times do |i|
+        if @my_x[i] == @my_x.first and @my_y[i] == @my_y.first+1
+          return true
+        end
+      end
+    when 'down'
+      @my_x.size.times do |i|
+        if @my_x[i] == @my_x.first and @my_y[i] == @my_y.first-1
+          return true
+        end
+      end
+  end
+  return false
 end
 
 if __FILE__ == $0

@@ -5,6 +5,8 @@ class Board
 
   attr_reader :height,:width,:food_loc
 
+  #TODO food loc constraints
+
   #Class variables
   @@start_dist= 5 #minimum distance from other players starting points.
                   #must be greater than Snake @@start_snake_length

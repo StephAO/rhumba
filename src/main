@@ -3,5 +3,5 @@ require_relative 'snake'
 require_relative 'player'
 require_relative 'game'
 
-a = [Player.new('Dave'), Player.new('John'), Player.new('Bob')]
+a = [Player.new('Dave', 'ruby greedy_ai')]#, Player.new('John', 'ruby greedy_ai'), Player.new('Bob', 'ruby greedy_ai')]
 Game.new(a)

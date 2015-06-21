@@ -47,9 +47,9 @@ class Game
       @players = alive_players + dead_players
 
       if alive_players.size == 1
-        puts "The last player left alive is #{alive_players.first.name}, #{check_winning.name} has the most points,"
+        # puts "The last player left alive is #{alive_players.first.name}, #{check_winning.name} has the most points,"
         if check_winning.id == alive_players.first.id
-          break
+          # break
         end
       end
     end
@@ -73,6 +73,7 @@ class Game
       elsif move == @board.food_loc
         puts 'I ate'
         player.commit(grow=true)
+        @board.gen_food
       else
         puts 'I moved'
         player.commit

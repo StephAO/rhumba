@@ -11,7 +11,7 @@ class Player
   @@num_players=0
 
   Data = Struct.new(:wins, :losses, :deaths, :avg_points) do
-    def weawts
+    def test
       puts 'test'
     end
   end
@@ -52,16 +52,13 @@ class Player
     #Inputs to AI:
     # (1) Board Height,Board Width,Number of Players, Number of Snakes
     # (2) Food Location x,Food Location Y
-    # (3) Player(owner) ID,Alive/Dead,Score,,Snake Tail,...,Snake Head #send alive players first then dead
+    # (3) Player(owner) ID,Alive/Dead,Score,Snake Head,...,Snake Tail #send alive players first then dead
     # (4) ...repeat for all snakes -> Coordinates are of form x,y => ID,Score,x,y,x1,y2,x2,x3,y3,...
     # Note: Lists are comma separated, inputs are space separated
     #Output from AI: "up","down","left" or right
 
     out=@cmd_str+" -s "+data_str
-    temp_s=`#{out}`
-    puts temp_s
-    @mem_move=@my_snake.next_coordinate(temp_s)
-    @mem_move = @my_snake.next_coordinate(gets.chomp)
+    @mem_move=@my_snake.next_coordinate(`#{out}`)
   end
 
   def snake_death
