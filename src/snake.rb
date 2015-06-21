@@ -23,6 +23,7 @@ class Snake
   end
 
   def next_coordinate(direction)
+    puts '-' + direction + '-'
     direction.downcase!
     x = @position.first.x
     y = @position.last.y
@@ -36,7 +37,7 @@ class Snake
       when 'down'
         y -= 1
       else
-        puts "ERROR: Next Coordinate: Invalid input!"
+        puts "ERROR: Next Coordinate: Invalid input!" + direction
         return
     end
     new_coord = Coordinates.new(x,y)

@@ -28,7 +28,7 @@ class Game
       alive_players.each { |p| taken.insert(0, p.my_snake.position)} #change to @players to include carcasses
       alive_players.each { |p| taken.push(p.mem_move)}
       alive_players.each do |p|
-        if !p.check_move
+        if !check_move(p, taken)
           p.snake_death
           alive_players.delete(p)
           dead_players.push(p)
@@ -68,7 +68,7 @@ class Game
     end
   end
 
-  def next_turn(alive_players,dead_players)
+  def next_move(alive_players,dead_players)
     #generate data to be passed to AI
 
     #board and num snake

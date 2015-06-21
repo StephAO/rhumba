@@ -23,4 +23,4 @@
 #   puts ""
 # end
 
-puts ["up","down","left","right"][rand(0...4)]
+print ['up','down','left','right'][rand(0...4)]
