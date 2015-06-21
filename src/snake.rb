@@ -3,10 +3,11 @@ require_relative 'coordinates'
 
 class Snake
 
+  attr_accessor :alive
+  attr_reader :position, :score
+
   #Class constant
   ALLOWED_MOVES||=['up','down','left','right']
-  attr_accessor :alive
-  attr_reader :score, :position
 
   def initialize(init_loc)
     @score = 0
@@ -14,7 +15,7 @@ class Snake
     @alive = true
   end
 
-  def move(new_pos, food = false, occupied = false)
+  def move(new_pos, food = false)
     if @alive
       @position.insert(new_pos, food)
       @score += @position.size
@@ -22,6 +23,7 @@ class Snake
   end
 
   def next_coordinate(direction)
+    puts '-' + direction + '-'
     direction.downcase!
     x = @position.first.x
     y = @position.last.y
@@ -35,11 +37,10 @@ class Snake
       when 'down'
         y -= 1
       else
-        puts "ERROR: Next Coordinate: Invalid input!"
+        puts "ERROR: Next Coordinate: Invalid input!" + direction
         return
     end
     new_coord = Coordinates.new(x,y)
-
   end
 
   def in_snake(coord)

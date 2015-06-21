@@ -3,7 +3,7 @@ require_relative 'Board'
 
 class Player
 
-  attr_reader :name,:my_snake,:num_snakes,:mem_move
+  attr_reader :name,:my_snake, :mem_move, :num_snakes
 
   #Class variables
   @@num_players=0
@@ -50,5 +50,8 @@ class Player
     cmd="ruby fake_ai "<<data_str
     puts cmd
     @mem_move=@my_snake.next_coordinate(`#{cmd}`)
+  end
+  def snake_death
+    @my_snake.alive = false
   end
 end
