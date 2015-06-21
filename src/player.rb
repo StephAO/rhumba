@@ -14,12 +14,14 @@ class Player
     end
   end
 
-  def initialize(_name)
+  def initialize(_name,_cmd_str)
     @name = _name #players name (string)
     @id = @@num_players     #players id (int)
     @data = Data.new(0,0,0,0)
     @@num_players+=1
     @num_snakes=0
+    @cmd_str=_cmd_str
+    init_ai
   end
 
   def gen_snake(init_loc)
@@ -36,6 +38,12 @@ class Player
     return out_str
   end
 
+  def init_ai
+    #pass snake id to player
+    out=@cmd_str+" -i "+@id.to_s
+    puts `#{out}` #shell command
+  end
+
   def call_ai(data_str)
     #Call AI to get next move
     #Done through command line
@@ -47,10 +55,12 @@ class Player
     # Note: Lists are comma separated, inputs are space separated
     #Output from AI: "up","down","left" or right
 
-    cmd="ruby fake_ai "<<data_str
-    puts cmd
-    @mem_move=@my_snake.next_coordinate(`#{cmd}`)
+    out=@cmd_str+" -s "+data_str
+    temp_s=`#{out}`
+    puts temp_s
+    @mem_move=@my_snake.next_coordinate(temp_s)
   end
+
   def snake_death
     @my_snake.alive = false
   end

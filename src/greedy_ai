@@ -1,0 +1,72 @@
+#name of snake memory
+MY_MEM='greedy.mem'
+
+def main(input)
+  #Check if initializing or passing snake data
+  if input[0]=='-i' then
+    #initialize
+    init(input[1])
+  elsif input[0]=='-s'
+    #handle snakes
+    greedy(input[1..-1])
+  end
+end
+
+
+def init(player_ID)
+  #store player_ID
+  File.write(MY_MEM, player_ID)
+end
+
+def is_me?(player_ID)
+  #checks if input player ID matches the player ID I have stored in memory
+  #returns boolean
+  stored_ID=File.open(MY_MEM) {|f| f.readline}.to_i
+  player_ID==stored_ID
+end
+
+def greedy(input)
+  #Step 1: get number of snakes
+  board_h, board_w, num_snakes=input[0].split(',').map(&:to_i)
+
+  #Step 2: get food location
+  food_x,food_y=input[1].split(',').map(&:to_i)
+
+  #Step 3: parse snake location data
+  for i in 0...num_snakes do
+    rhumba||=[]
+    arr=input[i+2].split(',').map(&:to_i)
+    x_coord=[]
+    y_coord=[]
+    player_ID=arr.shift
+    alive_dead=arr.shift.to_i ? "alive":"dead"
+    score=arr.shift
+    arr.each_with_index { |v,i| (i.odd? ? y_coord : x_coord) << v }
+    if is_me?(player_ID)
+      my_x=x_coord
+      my_y=y_coord
+      my_status=alive_dead
+      my_score=score
+    end
+  end
+
+  #Step 4: Greedy Algorithm
+  if (my_x.last>food_x)&&(my_x[-2]!=(my_x[-1]-1))
+    #go left
+    print "left"
+  elsif (my_x.last<food_x)&&(my_x[-2]!=(my_x[-1]+1))
+    #travel y
+    print "right"
+  elsif (my_y.last>food_y)&&(my_y[-2]!=(my_y[-1]-1))
+    print "down"
+  elsif (my_y.last<food_y)&&(my_y[-2]!=(my_y[-1]+1))
+    print "up"
+  else
+    print "wut"
+  end
+
+end
+
+if __FILE__ == $0
+  main(ARGV)
+end

@@ -65,7 +65,7 @@ class Board
 
       @players[i].gen_snake([start_loc.clone])
       #gen rest of snake
-      @@start_snake_length.times do
+      (@@start_snake_length - 1).times do
         while true
           rand_coord = @players[i].my_snake.next_coordinate(Snake::ALLOWED_MOVES[rand(0...Snake::ALLOWED_MOVES.length)])
           if not(@players[i].my_snake.in_snake(rand_coord)) then

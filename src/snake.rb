@@ -23,10 +23,9 @@ class Snake
   end
 
   def next_coordinate(direction)
-    puts '-' + direction + '-'
     direction.downcase!
     x = @position.first.x
-    y = @position.last.y
+    y = @position.first.y
     case direction
       when 'left'
         x -= 1

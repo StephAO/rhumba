@@ -9,6 +9,8 @@ class Game
   MIN_BOARD_SIZE_PER_PLAYER = 10
   MAX_BOARD_SIZE = 1000
 
+  attr_reader :board
+
   def initialize(_players)
     @players = _players
     @game_id = @@num_games
@@ -82,8 +84,6 @@ class Game
     l_get_data= lambda{|p| out_data<<" "<<p.get_data}
     alive_players.each(&l_get_data)
     dead_players.each(&l_get_data)
-
-    puts out_data
 
     #Call AI of each player with board+snake info
     alive_players.each{|p| p.call_ai(out_data)}
