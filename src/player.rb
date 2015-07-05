@@ -3,9 +3,7 @@ require_relative 'Board'
 
 class Player
 
-  attr_reader :name, :id, :my_snake, :mem_move, :num_snakes
-
-  #TODO snake generation inside box
+  attr_reader :name, :id, :my_snake, :mem_move, :num_snakes, :ai_debug
 
   #Class variables
   @@num_players=0
@@ -58,7 +56,9 @@ class Player
     #Output from AI: "up","down","left" or right
 
     out=@cmd_str+" -s "+data_str
-    @mem_move=@my_snake.next_coordinate(`#{out}`)
+    ai_out=`#{out}`
+    @ai_debug=ai_out.lines.to_a[0...-1].join
+    @mem_move=@my_snake.next_coordinate(ai_out.lines.last)
   end
 
   def snake_death

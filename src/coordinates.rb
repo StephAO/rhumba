@@ -27,4 +27,8 @@ class Coordinates
     return @x == other.x && @y == other.y
   end
 
+  def !=(other)
+    return @x != other.x || @y != other.y
+  end
+
 end

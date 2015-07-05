@@ -5,8 +5,6 @@ class Board
 
   attr_reader :height,:width,:food_loc
 
-  #TODO food loc constraints
-
   #Class variables
   @@start_dist= 5 #minimum distance from other players starting points.
                   #must be greater than Snake @@start_snake_length
@@ -26,16 +24,14 @@ class Board
 
   def gen_food
     #Sets a new food location, cannot be same as previous location or on edges
-    #TO DO: Need to handle cases where snake is already on generated location
 
     @new_loc||=Coordinates.new(nil,nil) #so it only has to be created once
     @food_loc||=@new_loc.clone
     rand_loc(@new_loc)
 
     if defined? @food_loc
-      until (@new_loc.x!=@food_loc.x)&&(@new_loc.y!=@food_loc.y)
+      until @new_loc!=@food_loc && @players.all? {|p| not(p.my_snake.in_snake(@new_loc))}
         rand_loc(@new_loc)
-        puts @new_loc.x.to_s<<" "<<@new_loc.y.to_s
       end
     end
 
@@ -44,7 +40,6 @@ class Board
   end
 
   def gen_start
-    #TO DO: gen  rest of points and avoid edges
     # generate start locations
     start_loc=Coordinates.new(nil,nil)
     attempts=0
@@ -70,7 +65,7 @@ class Board
       (@@start_snake_length - 1).times do
         while true
           rand_coord = @players[i].my_snake.next_coordinate(Snake::ALLOWED_MOVES[rand(0...Snake::ALLOWED_MOVES.length)])
-          if not(@players[i].my_snake.in_snake(rand_coord)) then
+          if not(@players[i].my_snake.in_snake(rand_coord)) && in_board(rand_coord) then
             break
           end
         end
@@ -82,11 +77,16 @@ class Board
 
   end
 
+  def in_board(c)
+    #checks if coordinate is in board
+    (c.x >= 0) && (c.x < @width) && (c.y >= 0) && (c.y < @height)
+  end
+
   private
 
   def rand_loc(c)
-    #randomizes coordinate not on edges
-    c.set_xy(rand(1...@width), rand(1...@height))
+    #randomizes coordinate within board
+    c.set_xy(rand(0...@width), rand(0...@height))
   end
 
 end

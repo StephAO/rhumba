@@ -18,7 +18,7 @@ class Game
     @n = rand(MIN_BOARD_SIZE_PER_PLAYER*(_players.size)...MAX_BOARD_SIZE) #y
     @m = rand(MIN_BOARD_SIZE_PER_PLAYER*(_players.size)...MAX_BOARD_SIZE) #x
     @board = Board.new(_players, @n, @m)
-    start_game
+    #start_game -> uncomment later
   end
 
   def start_game
