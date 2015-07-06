@@ -1,5 +1,5 @@
 #name of snake memory
-MY_MEM='greedy.mem'
+MY_MEM='greedy'
 @board_h=nil
 @board_w=nil
 @my_x=nil
@@ -19,13 +19,13 @@ end
 
 def init(player_ID)
   #store player_ID
-  File.write(MY_MEM, player_ID)
+  File.write(MY_MEM+player_ID+".mem", player_ID)
 end
 
 def is_me?(player_ID)
   #checks if input player ID matches the player ID I have stored in memory
   #returns boolean
-  stored_ID=File.open(MY_MEM) {|f| f.readline}.to_i
+  stored_ID=File.open(MY_MEM+player_ID.to_s+".mem") {|f| f.readline}.to_i
   player_ID==stored_ID
 end
 
