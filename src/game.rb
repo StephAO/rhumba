@@ -49,7 +49,7 @@ class Game
       if alive_players.size == 1
         # puts "The last player left alive is #{alive_players.first.name}, #{check_winning.name} has the most points,"
         if check_winning.id == alive_players.first.id
-          # break
+          break
         end
       end
     end

@@ -1,3 +1,21 @@
 require_relative 'game_window'
-game = GameWindow.new(100,200,3)
+require_relative 'frame'
+
+BUFFER = 20
+
+height = 50
+width = 100
+
+names = Array.new(['Dave', 'James', 'Richard'])
+scores = [1,2,3]
+a = Frame.new(10,scores,10)
+scores = [4,5,6]
+b = Frame.new(10,scores,10)
+Frame.frame_params(width,height,names)
+frames = Array.new([a,b])
+
+window_width = width*TILE_SIZE + BUFFER
+window_height = height*TILE_SIZE + FONT_SIZE + BUFFER
+
+game = GameWindow.new(window_width,window_height, 3, frames)
 game.show
