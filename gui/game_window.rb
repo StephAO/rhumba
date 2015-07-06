@@ -1,10 +1,5 @@
 require 'gosu'
-
-FONT_SIZE = 30
-WHITE = 0xffffffff
-GRAY = 0xff808080
-YELLOW = 0xffffff00
-GREEN = 0xff00ff00
+require_relative 'frame'
 
 class GameWindow < Gosu::Window
 
@@ -13,6 +8,8 @@ class GameWindow < Gosu::Window
   def initialize(_width, _height, _n_players, _frames, _fullscreen=false)
     super(_width, _height, _fullscreen)
 
+    @width = _width
+    @height = _height
     @current_frame = 0
     @frames = _frames
     @fonts = Array.new
@@ -20,11 +17,16 @@ class GameWindow < Gosu::Window
       new_name = Gosu::Font.new(FONT_SIZE)
       @fonts.push(new_name)
     end
+    @frame_num = Gosu::Font.new(FONT_SIZE)
   end
 
   def draw
-    @frames.at(@current_frame).draw(self, @fonts)
-    draw_quad(0,0,WHITE, 10,0,WHITE, 10,10,WHITE, 0,10,WHITE)
+    winner = @frames.at(@current_frame).draw(self, @fonts)
+    _str = "Frame #{@current_frame}"
+    if winner
+      _str = winner
+    end
+    @frame_num.draw_rel(_str, @width/2, @height - BUFFER/2, 0, 0.5, 0.5)
   end
 
   def button_down(id)
