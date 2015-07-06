@@ -41,7 +41,7 @@ class Player
     #Call AI to get next move
     #Done through command line
     #Inputs to AI:
-    # (1) Board Height,Board Width, Number of Snakes
+    # (1) Board Width,Board Height, Number of Snakes
     # (2) Food Location x,Food Location Y
     # (3) Player(owner) ID,Alive/Dead,Score,Snake Head,...,Snake Tail #send alive players first then dead
     # (4) ...repeat for all snakes -> Coordinates are of form x,y => ID,Score,x,y,x1,y2,x2,x3,y3,...

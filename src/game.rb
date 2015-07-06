@@ -108,7 +108,7 @@ class Game
     #board and num snake
     num_snakes=0
     @players.each{|p| num_snakes+=p.num_snakes}
-    out_data=[@board.height,@board.width,num_snakes].join(",")
+    out_data=[@board.width,@board.height,num_snakes].join(",")
 
     #food info
     out_data<<" #{@board.food_loc.x},#{@board.food_loc.y}"
@@ -126,7 +126,7 @@ class Game
     #stores game data in appropriate directory
     #directory = game_id
     #FORMAT:
-    # Line 0: Board Height, Board Width, Number of Players, Number of Snakes
+    # Line 0: Board Width, Board Height, Number of Players, Number of Snakes
     # Line 1: List of player names
     # Line 2: Turn Number. Starts at 0. String is of form "#0" or "#1"
     # Line 3: Food location
@@ -142,7 +142,7 @@ class Game
       #Line 0
       num_snakes=0
       @players.each{|p| num_snakes+=p.num_snakes}
-      f.write([@board.height,@board.width,@players.length,num_snakes].join(",")<<"\n")
+      f.write([@board.width,@board.height,@players.length,num_snakes].join(",")<<"\n")
 
       #Line 1
       f.write(@players.map{|p| p.name}.join(","))
