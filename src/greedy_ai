@@ -31,7 +31,7 @@ end
 
 def greedy(input)
   #Step 1: get number of snakes
-  @board_h, @board_w, num_snakes=input[0].split(',').map(&:to_i)
+  @board_w, @board_h, num_snakes=input[0].split(',').map(&:to_i)
 
   #Step 2: get food location
   food_x,food_y=input[1].split(',').map(&:to_i)
