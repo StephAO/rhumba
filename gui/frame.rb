@@ -37,10 +37,6 @@ class Frame
   # DRAWS THE BOARD
   def draw(window, fonts)
 
-    if @winner
-      return @winner
-    end
-
     # DRAW NAMES AND SCORES
     i = 0
     x = 0
@@ -54,7 +50,7 @@ class Frame
     end
 
     # DRAW GAME BOARD
-    y = FONT_SIZE + BUFFER
+    y = FONT_SIZE + BUFFER + (@@h -1)*TILE_SIZE
     x = BUFFER + TILE_SEPARATION/2
     @@h.times do |i|
       @@w.times do |j|
@@ -79,9 +75,9 @@ class Frame
         x += TILE_SIZE
       end
       x = BUFFER + TILE_SEPARATION/2
-      y += TILE_SIZE
+      y -= TILE_SIZE
     end
-    nil
+    return @winner
   end
 
   # INITIALIZES CLASS PARAMETERS

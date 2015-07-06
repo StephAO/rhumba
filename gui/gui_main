@@ -9,7 +9,7 @@ replay_name="../games/0.game"
 data=File.open(replay_name,'r').readlines.map(&:chomp)
 
 #Board size,number players, number players, number snakes
-height,width,num_p,num_s=data.shift.split(",").map(&:to_i)
+width,height,num_p,num_s=data.shift.split(",").map(&:to_i)
 
 #name of players
 names=data.shift.split(",")
@@ -41,6 +41,6 @@ end
 window_width = width*TILE_SIZE + 2*BUFFER
 window_height = height*TILE_SIZE + FONT_SIZE + 2*BUFFER
 
-game = GameWindow.new(window_width,window_height, 3, frames)
+game = GameWindow.new(window_width,window_height,names.size, frames)
 game.show
 

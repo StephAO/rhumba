@@ -49,7 +49,7 @@ class Game
       end
       #TODO: MAKE NICER
       alive_players = alive_players - dead_players
-      @players = alive_players + dead_players
+      # @players = alive_players + dead_players
 
       if alive_players.size == 1
         # puts "The last player left alive is #{alive_players.first.name}, #{check_winning.name} has the most points,"
@@ -71,7 +71,7 @@ class Game
     move = player.mem_move
     if move
       illegal = true
-      if (move.x > 0 && move.x < @m) and (move.y > 0 && move.y < @n)
+      if (move.x >= 0 && move.x < @m) and (move.y >= 0 && move.y < @n)
         illegal = false
       end
       if taken.include? move or illegal

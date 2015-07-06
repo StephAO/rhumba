@@ -20,6 +20,15 @@ class GameWindow < Gosu::Window
     @frame_num = Gosu::Font.new(FONT_SIZE)
   end
 
+  def update
+    if button_down? Gosu::KbUp and @current_frame > 0
+      @current_frame -= 1
+    end
+    if button_down? Gosu::KbDown and @current_frame < @frames.size - 1
+      @current_frame += 1
+    end
+  end
+
   def draw
     winner = @frames.at(@current_frame).draw(self, @fonts)
     _str = "Frame #{@current_frame}"
