@@ -41,6 +41,7 @@ class Player
     #Call AI to get next move
     #Done through command line
     #Inputs to AI:
+    # (0) Your player ID
     # (1) Board Width,Board Height, Number of Snakes
     # (2) Food Location x,Food Location Y
     # (3) Player(owner) ID,Alive/Dead,Score,Snake Head,...,Snake Tail #send alive players first then dead
@@ -48,10 +49,11 @@ class Player
     # Note: Lists are comma separated, inputs are space separated
     #Output from AI: "up","down","left" or right
 
-    out=@cmd_str+" -s "+data_str
+    out=@cmd_str+" -s #{id} "+data_str
     ai_out=`#{out}`
     @ai_debug=ai_out.lines.to_a[0...-1].join
     @mem_move=@my_snake.next_coordinate(ai_out.lines.last)
+    #puts "#{id}: #{ai_debug} ==> #{ai_out.lines.last}"
   end
 
   def snake_death

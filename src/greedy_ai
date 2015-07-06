@@ -19,34 +19,38 @@ end
 
 def init(player_ID)
   #store player_ID
-  File.write(MY_MEM+player_ID+".mem", player_ID)
+  File.write(MY_MEM+player_ID+".mem", "1")
 end
 
-def is_me?(player_ID)
+def initialized?(player_ID)
   #checks if input player ID matches the player ID I have stored in memory
   #returns boolean
-  stored_ID=File.open(MY_MEM+player_ID.to_s+".mem") {|f| f.readline}.to_i
-  player_ID==stored_ID
+  store=File.open(MY_MEM+player_ID.to_s+".mem") {|f| f.readline}.to_i
+  store.to_i ? true:false
 end
 
 def greedy(input)
-  #Step 1: get number of snakes
-  @board_w, @board_h, num_snakes=input[0].split(',').map(&:to_i)
+  #Step 1: get player id
+  my_id=input[0].to_i
 
-  #Step 2: get food location
-  food_x,food_y=input[1].split(',').map(&:to_i)
+  #Step 2: get number of snakes
+  @board_w, @board_h, num_snakes=input[1].split(',').map(&:to_i)
 
-  #Step 3: parse snake location data
+  #Step 3: get food location
+  food_x,food_y=input[2].split(',').map(&:to_i)
+
+  #Step 4: parse snake location data
   for i in 0...num_snakes do
     rhumba||=[]
-    arr=input[i+2].split(',').map(&:to_i)
+    arr=input[i+3].split(',').map(&:to_i)
     x_coord=[]
     y_coord=[]
-    player_ID=arr.shift
+    player_ID=arr.shift.to_i
     alive_dead=arr.shift.to_i ? "alive":"dead"
     score=arr.shift
     arr.each_with_index { |v,i| (i.odd? ? y_coord : x_coord) << v }
-    if is_me?(player_ID)
+    if player_ID==my_id and initialized?(player_ID) then
+      puts "My ID: #{player_ID}"
       @my_x=x_coord
       @my_y=y_coord
       my_status=alive_dead
@@ -54,7 +58,7 @@ def greedy(input)
     end
   end
 
-  #Step 4: Greedy Algorithm
+  #Step 5: Greedy Algorithm
   if (@my_x.first>food_x)
     go_left
   elsif (@my_x.first<food_x)
