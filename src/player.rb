@@ -34,14 +34,14 @@ class Player
   def init_ai
     #pass snake id to player
     out=@cmd_str+" -i "+@id.to_s
-    puts `#{out}` #shell command
+    @ai_debug=`#{out}` #shell command
   end
 
   def call_ai(data_str)
     #Call AI to get next move
     #Done through command line
     #Inputs to AI:
-    # (1) Board Height,Board Width,Number of Players, Number of Snakes
+    # (1) Board Height,Board Width, Number of Snakes
     # (2) Food Location x,Food Location Y
     # (3) Player(owner) ID,Alive/Dead,Score,Snake Head,...,Snake Tail #send alive players first then dead
     # (4) ...repeat for all snakes -> Coordinates are of form x,y => ID,Score,x,y,x1,y2,x2,x3,y3,...

@@ -1,8 +1,9 @@
 #Step 1: get number of snakes
-puts "Input of type: "<<ARGV[0]
 if ARGV[0]=="-i" then
+  puts
   exit
 end
+puts "Input of type: "<<ARGV[0]
 board_h, board_w, num_snakes=ARGV[1].split(',').map(&:to_i)
 puts "The Board is #{board_h} by #{board_w} and has #{num_snakes} snakes."
 
