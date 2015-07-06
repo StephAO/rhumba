@@ -1,0 +1,3 @@
+require_relative 'game_window'
+game = GameWindow.new(100,200,3)
+game.show
