@@ -165,7 +165,7 @@ class Game
     f.write(@players.map{|p| p.my_snake.position.arr.map{|c| "#{c.x},#{c.y}"}.join(",")}.join("\n"))
     if turn.is_a? String
       #Line 5
-      f.write("#{turn}\n")
+      f.write("\n#{turn}\n")
     end
     f.close()
   end

@@ -1,6 +1,42 @@
 require_relative 'game_window'
 require_relative 'frame'
 
+#calling from console
+#f_replay=ARGV[0]
+replay_name="../games/1.game"
+
+#open file
+data=File.open(replay_name,'r').readlines.map(&:chomp)
+
+#Board size,number players, number players, number snakes
+height,width,num_p,num_s=data.shift.split(",").map(&:to_i)
+
+#name of players
+players=data.shift.split(",")
+
+#list of frames
+frames=[]
+
+line=0
+while true
+  if data[line][0]=="#" then
+    food_loc=data[line+1].split(",").map(&:to_i)
+    scores=data[line+2].split(",").map(&:to_i)
+    snakes=data[line+3...line+3+num_s].collect{|s| s.split(",").map(&:to_i).each_slice(2).to_a}
+    if data[line][0..-1]=="END" then
+      #frames<<Frame.new(food_loc,scores,scores,data[line+4+num_s])
+      break
+    end
+    frames<<Frame.new(food_loc,scores,scores)
+    line+=num_s+3
+  else
+    puts "ERROR: Invalid grouping: "<<data[line]
+    break
+  end
+end
+
+exit
+
 BUFFER = 20
 
 height = 50
