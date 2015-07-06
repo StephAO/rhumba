@@ -8,16 +8,9 @@ class Player
   #Class variables
   @@num_players=0
 
-  # Data = Struct.new(:wins, :losses, :deaths, :avg_points) do
-  #   def test
-  #     puts 'test'
-  #   end
-  # end
-
   def initialize(_name,_cmd_str)
     @name = _name #players name (string)
     @id = @@num_players     #players id (int)
-    #@data = Data.new(0,0,0,0)
     @@num_players+=1
     @num_snakes=0
     @cmd_str=_cmd_str
