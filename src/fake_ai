@@ -4,17 +4,18 @@ if ARGV[0]=="-i" then
   exit
 end
 puts "Input of type: "<<ARGV[0]
-board_h, board_w, num_snakes=ARGV[1].split(',').map(&:to_i)
+puts "My id: #{ARGV[1]}"
+board_h, board_w, num_snakes=ARGV[2].split(',').map(&:to_i)
 puts "The Board is #{board_h} by #{board_w} and has #{num_snakes} snakes."
 
 #Step 2: get food location
-food=ARGV[2].split(',').map(&:to_i)
+food=ARGV[3].split(',').map(&:to_i)
 puts "The food is located at x=#{food[0]} y=#{food[1]}."
 
 #Step 3: parse snake location data
 for i in 0...num_snakes do
   rhumba||=[]
-  arr=ARGV[i+3].split(',').map(&:to_i)
+  arr=ARGV[i+4].split(',').map(&:to_i)
   x_coord=[]
   y_coord=[]
   player=arr.shift
