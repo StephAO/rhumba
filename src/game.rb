@@ -20,7 +20,7 @@ class Game
     @m = rand(MIN_BOARD_SIZE_PER_PLAYER*(_players.size)...MAX_BOARD_SIZE) #x
     @board = Board.new(_players, @n, @m)
     @game_loc=GAME_DIR+@game_id.to_s+".game"
-    #start_game -> uncomment later
+    start_game
   end
 
   def start_game
