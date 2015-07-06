@@ -13,6 +13,7 @@ class Game
   attr_reader :board
 
   def initialize(_players)
+    print 'start'
     @players = _players
     @game_id = @@num_games
     @@num_games += 1
@@ -21,6 +22,7 @@ class Game
     @board = Board.new(_players, @n, @m)
     @game_loc=GAME_DIR+@game_id.to_s+".game"
     start_game
+    print 'start'
   end
 
   def start_game
@@ -30,12 +32,9 @@ class Game
     until alive_players.empty?
       #write data to file
       write_data(turn)
-      puts @board.food_loc.coords_print
       next_move(alive_players, dead_players)
       taken = []
       alive_players.each do |p|
-        print p.name + ' - '
-        puts p.my_snake.snake_print
         p.my_snake.position.arr.each { |c| taken.push(c)} #change to @players to include carcasses
       end
       alive_players.each do |p|
@@ -54,7 +53,7 @@ class Game
       if alive_players.size == 1
         # puts "The last player left alive is #{alive_players.first.name}, #{check_winning.name} has the most points,"
         if check_winning.id == alive_players.first.id
-          break
+          # break
         end
       end
       turn+=1

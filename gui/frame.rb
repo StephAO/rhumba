@@ -52,8 +52,8 @@ class Frame
     # DRAW GAME BOARD
     y = FONT_SIZE + BUFFER + (@@h -1)*TILE_SIZE
     x = BUFFER + TILE_SEPARATION/2
-    @@h.times do |i|
-      @@w.times do |j|
+    @@w.times do |i|
+      @@h.times do |j|
 
         # PICK COLOR ACCORDING TO PLAYER AND FOOD
         c = GRAY
@@ -72,10 +72,10 @@ class Frame
         # DRAW SQUARE
         ts = TILE_SIZE - TILE_SEPARATION
         window.draw_quad(x,y,c,x+ts,y,c,x+ts,y+ts,c,x,y+ts,c)
-        x += TILE_SIZE
+        y -= TILE_SIZE
       end
-      x = BUFFER + TILE_SEPARATION/2
-      y -= TILE_SIZE
+      x += TILE_SIZE
+      y = FONT_SIZE + BUFFER + (@@h -1)*TILE_SIZE
     end
     return @winner
   end

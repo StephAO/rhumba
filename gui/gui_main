@@ -1,6 +1,8 @@
 require_relative 'game_window'
 require_relative 'frame'
 
+#TODO PRINT WINNER
+
 #calling from console
 #f_replay=ARGV[0]
 replay_name="../games/0.game"

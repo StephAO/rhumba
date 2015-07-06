@@ -33,6 +33,7 @@ class GameWindow < Gosu::Window
     winner = @frames.at(@current_frame).draw(self, @fonts)
     _str = "Frame #{@current_frame}"
     if winner
+      puts "winner is #{winner}"
       _str = winner
     end
     @frame_num.draw_rel(_str, @width/2, @height - BUFFER/2, 0, 0.5, 0.5)
