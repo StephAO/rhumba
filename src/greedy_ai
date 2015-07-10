@@ -74,10 +74,11 @@ def greedy(input)
 end
 
 def go_up
-  if not(in_snake("up"))
+  if not(in_snake("up")) and @my_y.first+1 < @board_h
     print "up"
   else
-    if @my_x.first+1 < @board_w
+    choice=rand(2)
+    if choice==1
       go_right
     else
       go_left
@@ -86,10 +87,11 @@ def go_up
 end
 
 def go_down
-  if not(in_snake("down"))
+  if not(in_snake("down")) and @my_y.first-1 > 0
     print "down"
   else
-    if @my_x.first-1 > 0
+    choice=rand(2)
+    if choice==1
       go_left
     else
       go_right
@@ -98,10 +100,11 @@ def go_down
 end
 
 def go_right
-  if not(in_snake("right"))
+  if not(in_snake("right")) and @my_x.first+1 < @board_w
     print "right"
   else
-    if @my_y.first-1 > 0
+    choice=rand(2)
+    if choice==1
       go_down
     else
       go_up
@@ -110,10 +113,11 @@ def go_right
 end
 
 def go_left
-  if not(in_snake("left"))
+  if not(in_snake("left")) and @my_x.first-1 > 0
     print "left"
   else
-    if @my_y.first+1 < @board_h
+    choice=rand(2)
+    if choice==1
       go_up
     else
       go_down
