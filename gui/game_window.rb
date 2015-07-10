@@ -47,9 +47,7 @@ class GameWindow < Gosu::Window
     elsif id == Gosu::KbRight and @current_frame < @frames.size - 1
       @current_frame += 1
     elsif id == Gosu::KbP
-      print @play
       @play = !@play
-      print '->' + @play.to_s
     end
   end
 
