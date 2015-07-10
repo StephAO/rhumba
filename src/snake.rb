@@ -22,6 +22,14 @@ class Snake
     end
   end
 
+  def starve
+    if @position.shrink
+      return true
+    else
+      return false
+    end
+  end
+
   def next_coordinate(direction)
     direction.downcase!
     x = @position.first.x
