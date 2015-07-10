@@ -33,18 +33,24 @@ class GameWindow < Gosu::Window
     winner = @frames.at(@current_frame).draw(self, @fonts)
     _str = "Frame #{@current_frame}"
     if winner
-      puts "winner is #{winner}"
-      _str = winner
+      _str = "Winner is #{winner}"
     end
     @frame_num.draw_rel(_str, @width/2, @height - BUFFER/2, 0, 0.5, 0.5)
   end
 
   def button_down(id)
+    puts id
     if id == Gosu::KbLeft and @current_frame > 0
       @current_frame -= 1
     end
     if id == Gosu::KbRight and @current_frame < @frames.size - 1
       @current_frame += 1
+    end
+    if id == Gosu::KbS
+      @current_frame = 0
+    end
+    if id == Gosu::KbE
+      @current_frame =  @frames.size-1
     end
   end
 

@@ -29,7 +29,7 @@ while true
     scores=data[line+2].split(",").map(&:to_i)
     snakes=data[line+3...line+3+num_s].collect{|s| s.split(",").map(&:to_i).each_slice(2).to_a}
     if data[line][1..-1]=="END" then
-      frames<<Frame.new(food_loc,scores,snakes,data[line+4+num_s])
+      frames<<Frame.new(food_loc,scores,snakes,data[line+3+num_s])
       break
     end
     frames<<Frame.new(food_loc,scores,snakes)
