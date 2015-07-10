@@ -40,4 +40,14 @@ class FIFO
     end
     found
   end
+
+  def shrink
+    @arr.pop
+    @size -= 1
+    if @size == 0
+      return true
+    else
+      return false
+    end
+  end
 end

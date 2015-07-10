@@ -13,6 +13,7 @@ class GameWindow < Gosu::Window
     @current_frame = 0
     @frames = _frames
     @fonts = Array.new
+    @play = false
     _n_players.times do
       new_name = Gosu::Font.new(FONT_SIZE)
       @fonts.push(new_name)
@@ -21,10 +22,11 @@ class GameWindow < Gosu::Window
   end
 
   def update
-    if button_down? Gosu::KbUp and @current_frame > 0
+    if @play and @current_frame < @frames.size - 1
+      @current_frame += 1
+    elsif button_down? Gosu::KbUp and @current_frame > 0
       @current_frame -= 1
-    end
-    if button_down? Gosu::KbDown and @current_frame < @frames.size - 1
+    elsif button_down? Gosu::KbDown and @current_frame < @frames.size - 1
       @current_frame += 1
     end
   end
@@ -42,9 +44,12 @@ class GameWindow < Gosu::Window
   def button_down(id)
     if id == Gosu::KbLeft and @current_frame > 0
       @current_frame -= 1
-    end
-    if id == Gosu::KbRight and @current_frame < @frames.size - 1
+    elsif id == Gosu::KbRight and @current_frame < @frames.size - 1
       @current_frame += 1
+    elsif id == Gosu::KbP
+      print @play
+      @play = !@play
+      print '->' + @play.to_s
     end
   end
 

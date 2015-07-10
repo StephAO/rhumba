@@ -45,4 +45,3 @@ window_height = height*TILE_SIZE + FONT_SIZE + 2*BUFFER
 
 game = GameWindow.new(window_width,window_height,names.size, frames)
 game.show
-

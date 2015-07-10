@@ -21,6 +21,7 @@ class Game
     @m = rand(MIN_BOARD_SIZE_PER_PLAYER*(_players.size)...MAX_BOARD_SIZE) #x
     @board = Board.new(_players, @n, @m)
     @game_loc=GAME_DIR+@game_id.to_s+".game"
+    @num_food = 1
     start_game
     print 'start'
   end
@@ -30,6 +31,7 @@ class Game
     dead_players = []
     turn=0
     until alive_players.empty?
+      puts turn
       #write data to file
       write_data(turn)
       next_move(alive_players, dead_players)
@@ -45,6 +47,16 @@ class Game
           p.snake_death
           dead_players.push(p)
         end
+      end
+      if @num_food % 5 == 0
+        alive_players.each do |p|
+          if p.my_snake.starve
+            puts 'a snake died'
+            p.snake_death
+            dead_players.push(p)
+          end
+        end
+        @num_food = 1
       end
       #TODO: MAKE NICER
       alive_players = alive_players - dead_players
@@ -65,23 +77,24 @@ class Game
 
 
   def check_move(player, taken)
-    print player.name
-    player.mem_move.coords_print
     move = player.mem_move
     if move
-      illegal = true
-      if (move.x >= 0 && move.x < @m) and (move.y >= 0 && move.y < @n)
-        illegal = false
+      illegal = false
+      if (move.x < 0 && move.x >= @m) and (move.y < 0 && move.y >= @n)
+        illegal = true
+      end
+      @players.each do |p|
+        if p.my_snake.in_snake(move)
+          illegal = true
+        end
       end
       if taken.include? move or illegal
-        puts 'I died'
         return false
       elsif move == @board.food_loc
-        puts 'I ate'
         player.commit(grow=true)
         @board.gen_food
+        @num_food += 1
       else
-        puts 'I moved'
         player.commit
       end
     else
