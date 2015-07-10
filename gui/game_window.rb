@@ -41,7 +41,6 @@ class GameWindow < Gosu::Window
   end
 
   def button_down(id)
-    puts id
     if id == Gosu::KbLeft and @current_frame > 0
       @current_frame -= 1
     elsif id == Gosu::KbRight and @current_frame < @frames.size - 1

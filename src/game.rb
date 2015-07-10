@@ -13,7 +13,6 @@ class Game
   attr_reader :board
 
   def initialize(_players)
-    print 'start'
     @players = _players
     @game_id = @@num_games
     @@num_games += 1
@@ -23,7 +22,6 @@ class Game
     @game_loc=GAME_DIR+@game_id.to_s+".game"
     @num_food = 1
     start_game
-    print 'start'
   end
 
   def start_game
@@ -31,7 +29,9 @@ class Game
     dead_players = []
     turn=0
     until alive_players.empty?
-      puts turn
+      if turn%25==0
+        puts "Turn: #{turn}"
+      end
       #write data to file
       write_data(turn)
       next_move(alive_players, dead_players)
