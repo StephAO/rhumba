@@ -77,4 +77,9 @@ class Player
     @losses += 1
   end
 
+  def delete_snake
+    @my_snake = nil
+    @num_snakes = 0
+  end
+
 end

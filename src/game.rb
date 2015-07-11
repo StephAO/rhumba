@@ -16,7 +16,6 @@ class Game
     @@num_games += 1
     @players = _players
     @game_id = @@num_games
-    @@num_games += 1
     @n = rand(MIN_BOARD_SIZE_PER_PLAYER*(_players.size)...MAX_BOARD_SIZE) #y
     @m = rand(MIN_BOARD_SIZE_PER_PLAYER*(_players.size)...MAX_BOARD_SIZE) #x
     @board = Board.new(_players, @n, @m)
@@ -76,6 +75,7 @@ class Game
     (@players - [winner]).each {|q| q.add_loss}
     puts "The winner is #{winner.name} with a score of #{winner.my_snake.score}"
     write_data(winner.name)
+    @players.each {|p| p.delete_snake}
   end
 
 
