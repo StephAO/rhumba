@@ -48,11 +48,9 @@ class GameWindow < Gosu::Window
       @current_frame += 1
     elsif id == Gosu::KbP
       @play = !@play
-    end
-    if id == Gosu::KbS
+    elsif id == Gosu::KbS
       @current_frame = 0
-    end
-    if id == Gosu::KbE
+    elsif id == Gosu::KbE
       @current_frame =  @frames.size-1
     end
   end
