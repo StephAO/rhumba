@@ -3,7 +3,7 @@ require_relative 'Board'
 
 class Player
 
-  attr_reader :name, :id, :my_snake, :mem_move, :num_snakes, :ai_debug
+  attr_reader :name, :id, :my_snake, :mem_move, :num_snakes, :ai_debug, :wins, :losses
 
   #Class variables
   @@num_players=0
@@ -14,6 +14,8 @@ class Player
     @@num_players+=1
     @num_snakes=0
     @cmd_str=_cmd_str
+    @wins = 0
+    @losses = 0
     init_ai
   end
 
@@ -46,14 +48,16 @@ class Player
     # (1) Board Width,Board Height, Number of Snakes
     # (2) Food Location x,Food Location Y
     # (3) Player(owner) ID,Alive/Dead,Score,Snake Head,...,Snake Tail #send alive players first then dead
-    # (4) ...repeat for all snakes -> Coordinates are of form x,y => ID,Score,x,y,x1,y2,x2,x3,y3,...
+    # (4) ...repeat for all snakes -> Coordinates are of form x,y => x,y,x1,y2,x2,x3,y3,...
     # Note: Lists are comma separated, inputs are space separated
     #Output from AI: "up","down","left" or right
 
     out=@cmd_str+" -s #{id} "+data_str
+    puts out
     ai_out=`#{out}`
     @ai_debug=ai_out.lines.to_a[0...-1].join
     @mem_move=@my_snake.next_coordinate(ai_out.lines.last)
+    puts @ai_debug
     #puts "#{id}: #{ai_debug} ==> #{ai_out.lines.last}"
   end
 
@@ -64,4 +68,13 @@ class Player
   def commit(grow=false)
     @my_snake.move(mem_move, grow)
   end
+
+  def add_win
+    @wins += 1
+  end
+
+  def add_loss
+    @losses += 1
+  end
+
 end

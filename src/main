@@ -3,10 +3,16 @@ require_relative 'snake'
 require_relative 'player'
 require_relative 'game'
 
-p=[]
-for i in 0...ARGV.length
-  str=ARGV[i].split(',')
-  p<<Player.new(str[0],str[1])
+REPETITION = 2;
+
+p=[Player.new('Dave', 'ruby greedy_ai'),Player.new('John', 'ruby greedy_ai')]
+# for i in 0...ARGV.length
+#   str=ARGV[i].split(',')
+#   p<<Player.new(str[0],str[1])
+# end
+
+REPETITION.times do |i|
+    Game.new(p)
 end
 
-Game.new(p)
+p.each{|q| puts "P:#{q.name} W:#{q.wins} L:#{q.losses}"}

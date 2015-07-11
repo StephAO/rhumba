@@ -6,13 +6,14 @@ class Game
 
   @@num_games = 0
 
-  MIN_BOARD_SIZE_PER_PLAYER = 10
-  MAX_BOARD_SIZE = 100
+  MIN_BOARD_SIZE_PER_PLAYER = 9
+  MAX_BOARD_SIZE = 20
   GAME_DIR= "../games/"
 
   attr_reader :board
 
   def initialize(_players)
+    @@num_games += 1
     @players = _players
     @game_id = @@num_games
     @@num_games += 1
@@ -71,6 +72,8 @@ class Game
       turn+=1
     end
     winner = check_winning
+    winner.add_win
+    (@players - [winner]).each {|q| q.add_loss}
     puts "The winner is #{winner.name} with a score of #{winner.my_snake.score}"
     write_data(winner.name)
   end

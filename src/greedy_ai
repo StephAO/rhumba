@@ -40,6 +40,8 @@ def greedy(input)
   food_x,food_y=input[2].split(',').map(&:to_i)
 
   #Step 4: parse snake location data
+  puts "INPUT: "
+  p input
   for i in 0...num_snakes do
     rhumba||=[]
     arr=input[i+3].split(',').map(&:to_i)
