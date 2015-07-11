@@ -1,11 +1,9 @@
 require_relative 'game_window'
 require_relative 'frame'
 
-#TODO PRINT WINNER
-
 #calling from console
-#f_replay=ARGV[0]
-replay_name="../games/0.game"
+replay_name=ARGV[0]
+replay_name="../games/"<<replay_name
 
 #open file
 data=File.open(replay_name,'r').readlines.map(&:chomp)

@@ -3,5 +3,10 @@ require_relative 'snake'
 require_relative 'player'
 require_relative 'game'
 
-a = [Player.new('Dave', 'ruby greedy_ai'), Player.new('George', 'ruby greedy_ai'), Player.new('Bob', 'ruby greedy_ai')]#, Player.new('John', 'ruby greedy_ai'), Player.new('Bob', 'ruby greedy_ai')]
-Game.new(a)
+p=[]
+for i in 0...ARGV.length
+  str=ARGV[i].split(',')
+  p<<Player.new(str[0],str[1])
+end
+
+Game.new(p)

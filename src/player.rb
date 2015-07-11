@@ -34,6 +34,7 @@ class Player
   def init_ai
     #pass snake id to player
     out=@cmd_str+" -i "+@id.to_s
+    puts out
     @ai_debug=`#{out}` #shell command
   end
 
