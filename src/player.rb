@@ -1,5 +1,3 @@
-require_relative 'Snake'
-require_relative 'Board'
 
 class Player
 
