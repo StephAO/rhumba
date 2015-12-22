@@ -62,6 +62,10 @@ Running the game:
 From the rhumba/src/ folder:
 ruby main Dave,'ruby greedy_ai' Bob,'ruby greedy_ai'
 
+Note: 
+If you are having errors with require_relative, comment them out in the player file.
+The issue arises when trying to load the same library twice.
+
 -------
 
 Using the GUI:
